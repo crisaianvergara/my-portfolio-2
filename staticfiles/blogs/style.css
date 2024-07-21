@@ -1,0 +1,36 @@
+/* Blogs */
+#blogs-section .post-author-overlay {
+    bottom: 0;
+    color: white;
+    font-size: 0.9rem;
+    left: 0;
+    position: absolute;
+    text-align: left;
+    width: 100%;
+}
+
+#blogs-section .post-content {
+    display: -webkit-box;
+    line-clamp: var(--max-lines);
+    --max-lines: 3;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--max-lines);
+}
+
+#blogs-section .post-link {
+    text-decoration: none;
+}
+
+/* Detail */
+#detail-section .post-content img {
+    display: block;
+    margin: 0 auto;
+}
+
+#detail-section pre {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 15px;
+}
