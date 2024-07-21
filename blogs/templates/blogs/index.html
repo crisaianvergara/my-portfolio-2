@@ -1,0 +1,26 @@
+{% extends "main/base.html" %}
+{% block content %}
+    <section id="blogs-section" class="flex-wrap d-flex justify-content-evenly">
+        {% if posts %}
+            {% for post in posts %}
+                <a href="{% url 'blogs:detail' post.id %}" class="post-link">
+                    <div class="card mb-3" style="max-width:350px;">
+                        <div class="card-image-container">
+                            <img src="{{ post.image_url }}" class="card-img-top card-image" alt="{{ post.name }}">
+                            <div class="post-author-overlay ms-3 py-1"><i class="fa-solid fa-user me-2"></i></i>{{ post.author_name }}</div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">{{ post.name }}</h5>
+                            <p class="card-text card-content post-content text-body-secondary">{{ post.content | striptags }}</p>
+                            <p class="card-text"><small>{{ post.published_date }}</small></p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <div class="empty-context text-center my-5 py-5">
+                <h2>Oops, no blog has been published.</h2>
+            </div>
+        {% endif %}
+    </section>
+{% endblock content %}

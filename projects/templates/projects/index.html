@@ -1,0 +1,43 @@
+{% extends "main/base.html" %}
+{% block content %}
+    <section id="projects-section" class="flex-wrap d-flex justify-content-evenly">
+        {% if projects %}
+            {% for project in projects %}
+                <div class="card mb-3" style="max-width:350px;">
+                    <div class="card-image-container">
+                        <img src="{{ project.image }}" class="card-img-top card-image" alt="{{ project.title }}">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">{{ project.title }}</h5>
+                        <p class="card-text card-content text-body-secondary">{{ project.description }}</p>
+                        {% if project.tags %}
+                            <div class="tags">
+                                <ul>
+                                    {% for tag in project.tags %}
+                                        <li class="badge rounded-pill text-bg-primary"">{{ tag }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer bg-white pb-0">
+                        <ul class="card-footer-link flex-wrap d-flex justify-content-evenly">
+                            <li><a class="card-link text-secondary" href="{{ project.site }}" target="_blank"><i class="fa-solid fa-eye"></i></a></li>
+                            <span>|</span>
+                            {% if project.repo %}
+                                <li><a class="card-link text-secondary" href="{{ project.repo }}" target="_blank"><i class="fa-brands fa-github"></i></a></li>
+                            {% else %}
+                                
+                                <li><span class="card-link text-secondary"><i class="fa-solid fa-circle-xmark"></i></span></li>
+                            {% endif %}    
+                            </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-context text-center my-5 py-5">
+                <h2>Oops, empty projects.</h2>
+            </div>
+        {% endif %}
+    </section>
+{% endblock content %}

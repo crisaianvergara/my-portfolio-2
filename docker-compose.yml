@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres
+    container_name: my_portfolio_django_db
+    env_file:
+      - .env
+  web:
+    build: .
+    container_name: my_portfolio_django_web
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/my_portfolio
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db

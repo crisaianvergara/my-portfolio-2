@@ -1,0 +1,11 @@
+{% extends "main/base.html" %}
+{% block content %}
+    <section id="detail-section">
+        <div class="row justify-content-evenly">
+            <div class="col-md-7">
+                <h1>{{ post.name }}</h1>
+                <div class="post-content">{{ post.content | safe }}</div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
