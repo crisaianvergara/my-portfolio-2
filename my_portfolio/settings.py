@@ -29,7 +29,13 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["crisaianvergara.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    "crisaianvergara.com",
+    "www.crisaianvergara.com",
+    "app.crisaianvergara.com",
+    "localhost",
+    "127.0.0.1"
+]
 
 
 # Application definition
@@ -63,7 +69,7 @@ ROOT_URLCONF = 'my_portfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
