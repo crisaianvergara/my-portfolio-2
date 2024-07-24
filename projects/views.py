@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from .utils import projects
+
+from .models import Project
 
 
 def index(request):
-    context = {"projects": projects,"title": "Projects"}
+    projects = Project.objects.order_by("name").all()
+    context = {"projects": projects, "title": "Projects"}
     return render(request, "projects/index.html", context)
