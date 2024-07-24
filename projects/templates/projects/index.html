@@ -1,19 +1,19 @@
 {% extends "main/base.html" %}
 {% block content %}
-    <section id="projects-section" class="flex-wrap d-flex justify-content-evenly">
+    <section id="projects-section" class="flex-wrap d-flex justify-content-center">
         {% if projects %}
             {% for project in projects %}
-                <div class="card mb-3" style="max-width:350px;">
+                <div class="card mb-4 mx-md-3" style="max-width:350px;">
                     <div class="card-image-container">
-                        <img src="{{ project.image }}" class="card-img-top card-image" alt="{{ project.title }}">
+                        <img src="{{ project.image.url }}" class="card-img-top card-image" alt="{{ project.name }}">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title mb-3">{{ project.title }}</h5>
+                        <h5 class="card-title mb-3">{{ project.name }}</h5>
                         <p class="card-text card-content text-body-secondary">{{ project.description }}</p>
-                        {% if project.tags %}
+                        {% if project.tags.all %}
                             <div class="tags">
                                 <ul>
-                                    {% for tag in project.tags %}
+                                    {% for tag in project.tags.all %}
                                         <li class="badge rounded-pill text-bg-primary"">{{ tag }}</li>
                                     {% endfor %}
                                 </ul>
@@ -23,7 +23,7 @@
                     <div class="card-footer bg-white pb-0">
                         <ul class="card-footer-link flex-wrap d-flex justify-content-evenly">
                             <li><a class="card-link text-secondary" href="{{ project.site }}" target="_blank"><i class="fa-solid fa-eye"></i></a></li>
-                            <span>|</span>
+                            <span class="card-link text-secondary">|</span>
                             {% if project.repo %}
                                 <li><a class="card-link text-secondary" href="{{ project.repo }}" target="_blank"><i class="fa-brands fa-github"></i></a></li>
                             {% else %}

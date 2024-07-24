@@ -1,10 +1,10 @@
 {% extends "main/base.html" %}
 {% block content %}
-    <section id="blogs-section" class="flex-wrap d-flex justify-content-evenly">
+    <section id="blogs-section" class="flex-wrap d-flex justify-content-center">
         {% if posts %}
             {% for post in posts %}
                 <a href="{% url 'blogs:detail' post.id %}" class="post-link">
-                    <div class="card mb-3" style="max-width:350px;">
+                    <div class="card mb-4 mx-md-3" style="max-width:350px;">
                         <div class="card-image-container">
                             <img src="{{ post.image_url }}" class="card-img-top card-image" alt="{{ post.name }}">
                             <div class="post-author-overlay ms-3 py-1"><i class="fa-solid fa-user me-2"></i></i>{{ post.author_name }}</div>

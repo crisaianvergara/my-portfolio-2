@@ -42,6 +42,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
+    'users.apps.UsersConfig',
     'main.apps.MainConfig',
     'projects.apps.ProjectsConfig',
     'blogs.apps.BlogsConfig',
@@ -134,9 +135,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
