@@ -37,6 +37,13 @@ ALLOWED_HOSTS = [
     "127.0.0.1"
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://www.crisaianvergara.com/",
+    "https://crisaianvergara.com/"
+]
+
+CSRF_COOKIE_SECURE = True  # Use True if using HTTPS
+SESSION_COOKIE_SECURE = True  # Use True if using HTTPS
 
 # Application definition
 
