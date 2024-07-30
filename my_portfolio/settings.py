@@ -47,7 +47,7 @@ SESSION_COOKIE_SECURE = True  # Use True if using HTTPS
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic', # WhiteNoise in development
+    # 'whitenoise.runserver_nostatic', # WhiteNoise in development
     'users.apps.UsersConfig',
     'main.apps.MainConfig',
     'projects.apps.ProjectsConfig',
