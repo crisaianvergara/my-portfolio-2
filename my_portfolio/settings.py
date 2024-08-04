@@ -31,7 +31,6 @@ DEBUG = os.environ["DEBUG"] != "False"
 ALLOWED_HOSTS = [
     "crisaianvergara.com",
     "www.crisaianvergara.com",
-    "app.crisaianvergara.com",
     "localhost",
     "127.0.0.1"
 ]

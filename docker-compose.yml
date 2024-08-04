@@ -11,7 +11,7 @@ services:
       sh -c "python manage.py makemigrations &&
              python manage.py migrate &&
              python manage.py collectstatic --noinput &&
-             gunicorn my_portfolio.wsgi:application --bind 0.0.0.0:8000 --workers 1 --timeout 30"
+             gunicorn my_portfolio.wsgi:application --bind 0.0.0.0:8000 --workers 1 --timeout 3600"
     volumes:
       - .:/my_portfolio
     ports:
