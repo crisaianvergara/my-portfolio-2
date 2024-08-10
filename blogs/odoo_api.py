@@ -1,6 +1,7 @@
 import xmlrpc.client
 from bs4 import BeautifulSoup
 from datetime import datetime
+import ssl
 
 from django.utils.dateformat import format
 from django.conf import settings
@@ -12,21 +13,25 @@ class OdooAPI:
         self.db = settings.ODOO_DB
         self.username = settings.ODOO_USERNAME
         self.password = settings.ODOO_PASSWORD
-        self.common = xmlrpc.client.ServerProxy(f"{self.url}/xmlrpc/2/common")
+        self.ssl_context = ssl.create_default_context(cafile="/etc/ssl/certs/ca-certificates.crt")
+        self.common = xmlrpc.client.ServerProxy(f"{self.url}/xmlrpc/2/common", context=self.ssl_context)
         self.uid = self.common.authenticate(self.db, self.username, self.password, {})
-        self.models = xmlrpc.client.ServerProxy(f"{self.url}/xmlrpc/2/object")
+        self.models = xmlrpc.client.ServerProxy(f"{self.url}/xmlrpc/2/object", context=self.ssl_context)
 
 
     def search_read(self, model, domain, fields, limit=0):
-        return self.models.execute_kw(
-            self.db,
-            self.uid,
-            self.password,
-            model,
-            "search_read",
-            [domain],
-            {"fields": fields, "limit": limit}
-        )
+        try:
+            return self.models.execute_kw(
+                self.db,
+                self.uid,
+                self.password,
+                model,
+                "search_read",
+                [domain],
+                {"fields": fields, "limit": limit}
+            )
+        except Exception as e:
+            print(f"Error: {e}")
     
 
     def soup_the_image_url(self, post):

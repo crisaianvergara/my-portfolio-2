@@ -31,8 +31,9 @@ DEBUG = os.environ["DEBUG"] != "False"
 ALLOWED_HOSTS = [
     "crisaianvergara.com",
     "www.crisaianvergara.com",
-    "localhost",
-    "127.0.0.1"
+    ".localhost",
+    "127.0.0.1",
+    "[::1]"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
