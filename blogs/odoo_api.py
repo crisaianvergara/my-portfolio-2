@@ -1,10 +1,13 @@
 import xmlrpc.client
 from bs4 import BeautifulSoup
 from datetime import datetime
-import ssl
+import time
+import logging
 
 from django.utils.dateformat import format
 from django.conf import settings
+
+logger = logging.getLogger(__name__)
 
 
 class OdooAPI:
@@ -13,25 +16,32 @@ class OdooAPI:
         self.db = settings.ODOO_DB
         self.username = settings.ODOO_USERNAME
         self.password = settings.ODOO_PASSWORD
-        self.ssl_context = ssl.create_default_context(cafile="/etc/ssl/certs/ca-certificates.crt")
-        self.common = xmlrpc.client.ServerProxy(f"{self.url}/xmlrpc/2/common", context=self.ssl_context)
+        self.common = xmlrpc.client.ServerProxy(f"{self.url}/xmlrpc/2/common")
         self.uid = self.common.authenticate(self.db, self.username, self.password, {})
-        self.models = xmlrpc.client.ServerProxy(f"{self.url}/xmlrpc/2/object", context=self.ssl_context)
+        self.models = xmlrpc.client.ServerProxy(f"{self.url}/xmlrpc/2/object")
 
 
-    def search_read(self, model, domain, fields, limit=0):
-        try:
-            return self.models.execute_kw(
-                self.db,
-                self.uid,
-                self.password,
-                model,
-                "search_read",
-                [domain],
-                {"fields": fields, "limit": limit}
-            )
-        except Exception as e:
-            print(f"Error: {e}")
+    def search_read(self, model, domain, fields, limit=0, retries=5):
+        for attempt in range(retries):
+            try:
+                result = self.models.execute_kw(
+                    self.db,
+                    self.uid,
+                    self.password,
+                    model,
+                    "search_read",
+                    [domain],
+                    {"fields": fields, "limit": limit}
+                )
+                if result is None:
+                    logger.warning(f"search_read returned None for model: {model}, domain: {domain}, fields: {fields}")
+                return result
+            except Exception as e:
+                logger.error(f"Error in search_read (attempt {attempt + 1}/{retries}): {e}")
+                if attempt < retries - 1:
+                    time.sleep(2)  # Wait before retrying
+                else:
+                    return None
     
 
     def soup_the_image_url(self, post):

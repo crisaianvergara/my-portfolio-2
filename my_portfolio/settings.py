@@ -154,3 +154,31 @@ ODOO_URL = os.environ["ODOO_URL"]
 ODOO_DB = os.environ["ODOO_DB"]
 ODOO_USERNAME = os.environ["ODOO_USERNAME"]
 ODOO_PASSWORD = os.environ["ODOO_PASSWORD"]
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename":  os.path.join(BASE_DIR, "logs/django.log"),
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+    },
+}

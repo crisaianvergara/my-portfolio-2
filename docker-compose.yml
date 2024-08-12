@@ -14,6 +14,7 @@ services:
              gunicorn my_portfolio.wsgi:application --bind 0.0.0.0:8000 --workers 1 --timeout 3600"
     volumes:
       - .:/my_portfolio
+      - ./logs:/my_portfolio/logs
     ports:
       - "8000:8000"
     depends_on:
