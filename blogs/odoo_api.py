@@ -39,7 +39,7 @@ class OdooAPI:
             except Exception as e:
                 logger.error(f"Error in search_read (attempt {attempt + 1}/{retries}): {e}")
                 if attempt < retries - 1:
-                    time.sleep(2)  # Wait before retrying
+                    time.sleep(1)  # Wait before retrying
                 else:
                     return None
     

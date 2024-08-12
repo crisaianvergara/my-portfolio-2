@@ -163,19 +163,28 @@ LOGGING = {
             "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
             "style": "{",
         },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
     },
     "handlers": {
         "file": {
-            "level": "DEBUG",
+            "level": "INFO",
             "class": "logging.FileHandler",
             "filename":  os.path.join(BASE_DIR, "logs/django.log"),
             "formatter": "verbose",
         },
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
     },
     "loggers": {
         "django": {
-            "handlers": ["file"],
-            "level": "DEBUG",
+            "handlers": ["file", "console"],
+            "level": "INFO",
             "propagate": True,
         },
     },
