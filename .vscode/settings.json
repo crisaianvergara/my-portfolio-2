@@ -1,9 +1,6 @@
 {
     "cSpell.words": [
         "levelname",
-        "makemigrations",
-        "nostatic",
-        "psycopg",
-        "startproject"
+        "nostatic"
     ]
 }
