@@ -24,7 +24,7 @@
 - python manage.py runserver - run the application
 
 # Create app
-- python manage.py startup <app_name> - create app same directory as the <project_name>
+- python manage.py startapp <app_name> - create app same directory as the <project_name>
 
 # Database setup
 - pip install "psycopg[binary]" - install psycopg
